@@ -41,6 +41,15 @@ php artisan boost:install
 
 Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
+```bash
+docker run --rm \
+  -u "$(id -u):$(id -g)" \
+  -v "$(pwd):/app" \
+  -w /app \
+  composer:latest \
+  composer install --ignore-platform-reqs
+```
+
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
