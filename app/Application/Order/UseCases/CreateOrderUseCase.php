@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\Order\UseCases;
 
-use App\Application\Order\DTOs\CreateOrderDto;
+use App\Application\Order\DTOs\CreateOrderInput;
 use App\Application\Order\DTOs\CreateOrderOutput;
 use App\Domain\Contracts\OrderRepositoryInterface;
 use App\Domain\Entities\Order;
@@ -16,7 +16,7 @@ class CreateOrderUseCase
         private readonly OrderRepositoryInterface $orderRepository,
     ) {}
 
-    public function execute(CreateOrderDto $dto): CreateOrderOutput
+    public function execute(CreateOrderInput $dto): CreateOrderOutput
     {
         $order = Order::create($dto);
 

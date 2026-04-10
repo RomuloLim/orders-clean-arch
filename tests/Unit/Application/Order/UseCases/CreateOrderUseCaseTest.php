@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Application\Order\UseCases;
 
-use App\Application\Order\DTOs\CreateOrderDto;
+use App\Application\Order\DTOs\CreateOrderInput;
 use App\Application\Order\DTOs\CreateOrderOutput;
 use App\Application\Order\UseCases\CreateOrderUseCase;
 use App\Domain\Contracts\OrderRepositoryInterface;
@@ -17,7 +17,7 @@ class CreateOrderUseCaseTest extends TestCase
     {
         $useCase = new CreateOrderUseCase(new FakeOrderRepository(15));
 
-        $output = $useCase->execute(new CreateOrderDto(customerId: 10));
+        $output = $useCase->execute(new CreateOrderInput(customerId: 10));
 
         $this->assertInstanceOf(CreateOrderOutput::class, $output);
         $this->assertSame(15, $output->id);
@@ -30,7 +30,7 @@ class CreateOrderUseCaseTest extends TestCase
 
         $useCase = new CreateOrderUseCase(new FakeOrderRepository(null));
 
-        $useCase->execute(new CreateOrderDto(customerId: 10));
+        $useCase->execute(new CreateOrderInput(customerId: 10));
     }
 }
 

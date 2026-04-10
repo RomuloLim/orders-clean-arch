@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Domain\Entities;
 
-use App\Application\Order\DTOs\CreateOrderDto;
+use App\Application\Order\DTOs\CreateOrderInput;
 use App\Domain\Entities\Order;
 use App\Domain\Enums\OrderStatus;
 use PHPUnit\Framework\TestCase;
@@ -11,7 +11,7 @@ class OrderTest extends TestCase
 {
     public function test_create_order_with_open_status()
     {
-        $dto = new CreateOrderDto(
+        $dto = new CreateOrderInput(
             customerId: 1,
         );
 

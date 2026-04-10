@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Order;
 
-use App\Application\Order\DTOs\CreateOrderDto;
+use App\Application\Order\DTOs\CreateOrderInput;
 use App\Application\Order\UseCases\CreateOrderUseCase;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Order\CreateOrderResource;
@@ -18,8 +18,9 @@ class CreateOrderController extends Controller
     public function __invoke(
         Request $request,
         CreateOrderUseCase $useCase
-    ): JsonResponse {
-        $dto = new CreateOrderDto(
+    ): JsonResponse
+    {
+        $dto = new CreateOrderInput(
             $request->input('customer_id'), // todo: get from auth when auth will be implemented
         );
 

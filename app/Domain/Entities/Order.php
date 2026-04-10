@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Entities;
 
-use App\Application\Order\DTOs\CreateOrderDto;
+use App\Application\Order\DTOs\CreateOrderInput;
 use App\Domain\Enums\OrderStatus;
 
 class Order
@@ -15,7 +15,7 @@ class Order
         public OrderStatus $status,
     ) {}
 
-    public static function create(CreateOrderDto $addOrderDto): self
+    public static function create(CreateOrderInput $addOrderDto): self
     {
         return new self(
             id: null,
