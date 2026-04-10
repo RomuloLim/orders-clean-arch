@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @mixin IdeHelperOrder
+ */
+#[Fillable(['customer_id', 'status'])]
 class Order extends Model
 {
-    protected $fillable = [
-        'customer_id',
-        'status',
-    ];
-
-//    public function items()
-//    {
-//        return $this->hasMany(OrderItem::class);
-//    }
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
