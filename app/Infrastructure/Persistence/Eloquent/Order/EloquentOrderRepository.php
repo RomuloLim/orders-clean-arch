@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-
 namespace App\Infrastructure\Persistence\Eloquent\Order;
 
 use App\Domain\Contracts\OrderRepositoryInterface;
-use App\Domain\Entities\Order;
-use App\Models\Order as OrderModel;
+use App\Domain\Entities\Order as OrderEntity;
+use App\Models\Order;
 
 class EloquentOrderRepository implements OrderRepositoryInterface
 {
-    public function create(Order $order): Order
+    public function create(OrderEntity $order): OrderEntity
     {
-        $eloquentOrder = OrderModel::create([
+        $eloquentOrder = Order::create([
             'customer_id' => $order->customerId,
             'status' => $order->status,
         ]);
@@ -21,9 +20,9 @@ class EloquentOrderRepository implements OrderRepositoryInterface
         return $this->toEntity($eloquentOrder);
     }
 
-    private function toEntity(OrderModel $order): Order
+    private function toEntity(Order $order): OrderEntity
     {
-        return new Order(
+        return new OrderEntity(
             id: $order->id,
             customerId: $order->customer_id,
             status: $order->status,

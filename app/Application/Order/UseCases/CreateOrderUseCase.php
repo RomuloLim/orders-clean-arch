@@ -2,28 +2,32 @@
 
 declare(strict_types=1);
 
-
 namespace App\Application\Order\UseCases;
 
+use App\Application\Order\DTOs\CreateOrderInput;
+use App\Application\Order\DTOs\CreateOrderOutput;
 use App\Domain\Contracts\OrderRepositoryInterface;
 use App\Domain\Entities\Order;
-use App\Domain\Enums\OrderStatus;
+use RuntimeException;
 
 class CreateOrderUseCase
 {
     public function __construct(
         private readonly OrderRepositoryInterface $orderRepository,
-    )
-    {
-    }
+    ) {}
 
-    public function excecute(array $data): void
+    public function execute(CreateOrderInput $dto): CreateOrderOutput
     {
-        $order = new Order(
-            customerId: $data['customer_id'],
-            status: OrderStatus::OPEN,
+        $order = Order::create($dto);
+
+        $order = $this->orderRepository->create($order);
+
+        if ($order->id === null) {
+            throw new RuntimeException('Unable to create order output without an ID.');
+        }
+
+        return new CreateOrderOutput(
+            id: $order->id,
         );
-
-        $this->orderRepository->create($order);
     }
 }
